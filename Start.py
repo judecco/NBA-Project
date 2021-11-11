@@ -69,7 +69,7 @@ def home():
 @application.route("/AddPlayer", methods=[ "GET", "POST"])
 def new_player():
     form= AddPlayer()
-    choices=(team[id], team[name])
+    choices=(team_id, team_name for teams in nba_team_library)
     if form.validate_on_submit():
         cursor.execute(f"INSERT into nba_player_library(first_name, last_name, hometown, college, height, position, team ) values('{form.first_name.data}', '{form.last_name.data}', '{form.hometown.data}', '{form.college.data}', '{form.height.data}', '{form.position.data}', '{form.team.data}' ")
     return render_template("AddPlayer.html", form=form)
