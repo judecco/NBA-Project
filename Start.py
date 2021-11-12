@@ -27,7 +27,7 @@ def players():
     cursor.execute("Select * from nba_player_library")
     allrecords=cursor.fetchall()
     print()
-    return render_template("players.html")
+    return render_template("players.html",records=allrecords)
 
 @application.route('/conference/')
 def conference():
@@ -46,8 +46,6 @@ def W_conference():
         return render_template("W_conference.html",records=allrecords)
     else:
         return render_template("E_conference.html",records=allrecords)
-        
-
 
 @application.route('/E_conference',methods=["GET", "POST"])
 def E_conference():
@@ -59,22 +57,53 @@ def E_conference():
         cursor.execute("Select * from nba_team_library where division_id in('D1', 'D2', 'D3')")
         allrecords=cursor.fetchall()
     return render_template("E_conference.html",records=allrecords)
-       
 
-@application.route('/home')
-def home():
-    things=" Please choose an option"
-    return render_template("home.html")
+       
 
 @application.route("/AddPlayer", methods=[ "GET", "POST"])
 def new_player():
-   form= AddPlayer()
-   choices=team_name.query.filter_by(team=request.form["team_name"]).all()
-if form.validate_on_submit():
-    cursor.execute(f"INSERT into nba_player_library(first_name, last_name, hometown, college, height, position, team ) values('{form.first_name.data}', '{form.last_name.data}', '{form.hometown.data}', '{form.college.data}', '{form.height.data}', '{form.position.data}', '{form.team.data}' ")
-    db.session.add(newplayer)
-    db.session.commit()
-    return render_template("AddPlayer.html", form=form)
+    form1= AddPlayer()
+    if form1.validate_on_submit():
+        cursor.execute(f"INSERT into nba_player_library(first_name, last_name, hometown, college, height, position, team ) values('{form.first_name.data}', '{form.last_name.data}', '{form.hometown.data}', '{form.college.data}', '{form.height.data}', '{form.position.data}', '{form.team.data}' ")
+        mydb.commit()
+    cursor.execute("select * from nba_team_library")
+    teams_list=cursor.fetchall()
+    cursor.execute("select * from nba_division_wiki")
+    return render_template("AddPlayer.html",form=form1, teams=teams_list)
 
+
+@application.route("/editplayer/<int:playerid>", methods=[ "GET", "POST"])
+def editplayer(playerid):
+    form= UpdatePlayer()
+    cursor.execute("select first_name from nba_player_library where player_id=Player_ID")
+    player_data=cursor.fetchall()
+    form.first_name.data= player_data[0]
+    form.last_name.data =  player_data[1]
+    form.hometown.data = player_data[2]
+    form.college.data = player_data[3]
+    form.height.data = player_data[4]
+
+
+    if form.validate_on_submit():
+        cursor.execute(f"INSERT nba_player_library(first_name, last_name, hometown, college, height, position, team ) values('{form.first_name.data}', '{form.last_name.data}', '{form.hometown.data}', '{form.college.data}', '{form.height.data}', '{form.position.data}', '{form.team.data}' ")
+        mydb.commit()
+        return redirect("/editplayer/playerid",form=form)
+    return render_template("EditPlayer.html",form=form)
+
+
+@application.route("/saveNewPlayer",methods=["post"])
+def add_new_player():
+    record=request.form
+    sqlInsertQuery=" insert into nba_player_library values('{0}','{1}','{2}','{3}',{4},'{5}','{6}',{7})".format(request.form["first_name"],request.form["last_name"], request.form["hometown"], request.form["college"], request.form["height"], request.form["position"], request.form["team"],'null')
+    print(sqlInsertQuery)
+    cursor.execute(sqlInsertQuery)
+    mydb.commit()
+    return redirect("players")
+
+@application.route("/deletePlayer/<player_id>")
+def deletePlayer(player_id):
+    cursor.execute("DELETE FROM nba_player_library WHERE Player_ID = '{}'").format(player_id)
+    mydb.commit()
+    return redirect("players.html")     
 
 application.run(debug=True, host = "0.0.0.0")

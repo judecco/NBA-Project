@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+              src="https://fadeawayworld.net/.image/t_share/MTgxNzk0NzEzMDkzODA5NDgw/200597416_182155713839521_5768221224384196135_n.jpg"
+              preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+              dy=".3em">Players</text></img>
+            <div class="card-body">
+              <p class="card-text">Click here to view the current list of active NBA players for the 2021-2022 season.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" a class="nav-link" href="{{ url_for('players') }}" >View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+              src="https://i.pinimg.com/originals/7e/8f/57/7e8f576ce15d1f066aef56550fb264f6.png"
+              preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Teams</title>
+            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+              dy=".3em">Teams</text></img>
+            <div class="card-body">
+              <p class="card-text">Click here to view the current list of active NBA teams for the 2021-2022 season.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+              src="https://ats.io/wp-content/uploads/2019/11/east-west-e1572884193925.jpg"
+              preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+              dy=".3em">Conference</text></img>
+            <div class="card-body">
+              <p class="card-text">Click here to view the current teams by division for the 2021-2022 season.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content-section text-center ">
+    <form class="form-signin" method="POST" action="/saveNewPlayer">
+        {{ form.hidden_tag() }}
+        <Fieldset class="form-group">
+            <div class='form'>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        {{ form.first_name.label(class="form-control-label") }}
+
+                        {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.first_name(class="form-control form-control-lg") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.last_name.label(class="form-control-label") }}
+
+                        {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.last_name(class="form-control form-control-lg") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.hometown.label(class="form-control-label") }}
+
+                        {% if form.hometown.errors %}
+                        {{ form.hometown(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.hometown.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.hometown(class="form-control form-control-lg") }}
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.college.label(class="form-control-label") }}
+
+                        {% if form.college.errors %}
+                        {{ form.college(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.college.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.college(class="form-control form-control-lg") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.height.label(class="form-control-label") }}
+
+                        {% if form.height.errors %}
+                        {{ form.height(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.height.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.height(class="form-control form-control-lg") }}
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.position.label(class="form-control-label") }}
+
+                        {% if form.position.errors %}
+                        {{ form.position(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.position.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.position(class="form-control form-control-lg") }}
+                        {% endif %}
+
+
+                        <select name="Division">
+                            <option value="value" selected> Select </option>
+                            <option value="D1"> Atlantic </option>
+                            <option value="D2"> Central </option>
+                            <option value="D3"> Southeast </option>
+                            <option value="D4"> Northwest </option>
+                            <option value="D5"> Pacific </option>
+                            <option value="D6"> Southwest </option>
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    {% for team in teams %}
+                    <input type="radio" name="team" value="{{team[0]}}"> {{team[0]}} <br>
+                    {% endfor %}
+                    <input type="submit">
+            </div>
+
+
+</div>
+<div class="form-group">
+
+</div>
+</div>
+</form>
+</div>
+</Fieldset>
+</form>
+</div>
+{% endblock %}

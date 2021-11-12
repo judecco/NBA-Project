@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1> All Teams </h1>
+    <p class="lead text-muted"> The National Basketball Association (NBA) is a professional basketball league in North
+      America. The league is composed of 30 teams (29 in the United States and 1 in Canada) and is one of the four major
+      professional sports leagues in the United States and Canada. It is the premier men's professional basketball
+      league in the world.</p>
+    <p>
+      <br>
+      <br>
+      <br>
+      <a href="#" class="btn btn-primary my-2"> </a>
+        <form action="http://localhost:5000/W_conference" method="POST"> 
+          <select name="Division">
+              <option value="value" selected> Select </option>
+              <option value="D1"> Atlantic </option>
+              <option value="D2"> Central </option>
+              <option value="D3"> Southeast </option>
+              <option value="D4"> Northwest </option>
+              <option value="D5"> Pacific </option>
+              <option value="D6"> Southwest </option>
+        </select>
+        <input type="submit" value="Filter"></a>
+      </form>
+    <table class="table table-hover">
+
+      <td> Team Name</td>
+      <td> Arena </td>
+
+      {% for record in records %}
+
+      <tr>
+        <th> {{ record[0]}}</th>
+        <th> {{record[1] }} </th>
+
+
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+
+    </tr>
+    </p>
+  </div>
+</section>
+{% endblock %}
