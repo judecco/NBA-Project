@@ -68,32 +68,13 @@ def home():
 
 @application.route("/AddPlayer", methods=[ "GET", "POST"])
 def new_player():
-    form= AddPlayer()
-    choices=(team_id, team_name for teams in nba_team_library)
-    if form.validate_on_submit():
-        cursor.execute(f"INSERT into nba_player_library(first_name, last_name, hometown, college, height, position, team ) values('{form.first_name.data}', '{form.last_name.data}', '{form.hometown.data}', '{form.college.data}', '{form.height.data}', '{form.position.data}', '{form.team.data}' ")
+   form= AddPlayer()
+   choices=team_name.query.filter_by(team=request.form["team_name"]).all()
+if form.validate_on_submit():
+    cursor.execute(f"INSERT into nba_player_library(first_name, last_name, hometown, college, height, position, team ) values('{form.first_name.data}', '{form.last_name.data}', '{form.hometown.data}', '{form.college.data}', '{form.height.data}', '{form.position.data}', '{form.team.data}' ")
+    db.session.add(newplayer)
+    db.session.commit()
     return render_template("AddPlayer.html", form=form)
 
-#@application.route("/filter",methods=["POST"])
-#def filterdiv():
-   # if request.form["division"]=="all":
-        #return redirect("/")
-    #else:
-        #data = filterdiv.query.filter_by(division=request.form["Atlantic"]).all()
-        #return render_template("conference.html",records=data)
-#display a list
-#@application.route('/filter/<division_id>/<division_name>', methods=['POST', 'GET'])
-#def division(division_id, division_name):
- #   form = ListForm()
-  #  cursor.execute("SELECT item_name, date_created, iditems FROM items WHERE list_owner = '{0}';".format(list_id))
-   # items_in_list = cursor.fetchall()
-#
- #   if form.is_submitted():
-  #      cursor.execute("INSERT INTO items (iditems, item_name, list_owner, date_created) VALUES(NULL, '{0}', '{1}', now());".format(form.list_item.data, list_id))
-   #     db.commit()
-    #    flash(f'New List Created!!', 'success')
-     #   return redirect(url_for('list', list_id=list_id, list_name=list_name))
-
-    #return render_template("list.html", form=form, list_items = items_in_list, list_name=list_name, list_id=list_id)
 
 application.run(debug=True, host = "0.0.0.0")
