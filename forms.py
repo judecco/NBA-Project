@@ -15,6 +15,7 @@ class AddPlayer(FlaskForm):
     submit = SubmitField('Add')
 
 class UpdatePlayer(FlaskForm):
+    player_id=IntegerField("Player ID", validators=[DataRequired()])
     first_name = StringField("First Name", validators=[DataRequired()])
     last_name = StringField("Last Name", validators=[DataRequired()])
     hometown = StringField("Hometown", validators=[DataRequired()])

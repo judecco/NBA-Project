@@ -10,36 +10,37 @@
         Association (NBA), the other being the Eastern Conference. Both conferences consist of 15 teams organized into
         three divisions.</p>
       <p>
-        <a href="#" class="btn btn-primary my-2"> 
-          <form action="http://localhost:5000/W_conference" method="POST"> 
-          <select name="Division">
-              
+        <a href="#">
+          <form action="http://localhost:5000/W_conference" method="POST">
+            <select name="Division">
+              <option value="value" selected> Select </option>
               <option value="D4"> Northwest </option>
               <option value="D5"> Pacific </option>
               <option value="D6"> Southwest </option>
-        </select>
-        <input type="submit" value="Filter"></a>
-      </form>
+            </select>
+            <input type="submit" value="Filter">
+        </a>
+        </form>
       <table>
         <table class="table table-hover">
 
           <td> Team Name</td>
           <td> Arena </td>
-    
+
           {% for record in records %}
-    
+
           <tr>
             <th> {{ record[0]}}</th>
             <th> {{record[1] }} </th>
-    
-    
+
+
             </td>
           </tr>
-    
+
           {% endfor %}
         </table>
-          </tr>
-          </p>
+        </tr>
+        </p>
     </body>
   </div>
 </section>

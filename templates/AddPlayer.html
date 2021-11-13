@@ -114,6 +114,7 @@
                     <br>
                     <br>
                     {% for team in teams %}
+                    {{form.division.label}}
                     <input type="radio" name="team" value="{{team[0]}}"> {{team[0]}} <br>
                     {% endfor %}
                     <input type="submit">
