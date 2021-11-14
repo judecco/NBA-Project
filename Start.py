@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from forms import AddPlayer, UpdatePlayer
+from os import getenv
+import pymysql
 
 application =Flask(__name__)
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/flask_nba'
+application.config['SQLALCHEMY_DATABASE_URI'] = getenv('mydb_uri')
 application.config['SECRET_KEY'] = "GREENBAYRAPTORS"
 
 
