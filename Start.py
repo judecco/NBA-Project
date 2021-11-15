@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from forms import AddPlayer, UpdatePlayer
 from os import getenv
-import pymysql
 
 application =Flask(__name__)
 application.config['SQLALCHEMY_DATABASE_URI'] = getenv('mydb_uri')
@@ -19,11 +18,14 @@ mydb = mysql.connector.connect(
 
 cursor = mydb.cursor(buffered=True)
 
+#Homepage Route
 @application.route('/')
 def index():
     stuff= "A list for <strong>Every</strong> active NBA player"
     return render_template("index.html", stuff=stuff )
 
+
+#Route to show Player Information
 @application.route('/players', methods=["GET", "POST"])
 def players():
     cursor.execute("Select * from nba_player_library")
@@ -31,6 +33,7 @@ def players():
     print()
     return render_template("players.html",records=allrecords)
 
+#Route to show All Teams with both conference's filters
 @application.route('/conference/')
 def conference():
     cursor.execute("Select * from nba_team_library")
@@ -38,6 +41,7 @@ def conference():
     print()
     return render_template("conference.html", records=allrecords)
 
+#Route to show Western Conference Teams with Western Conference filters
 @application.route('/W_conference',methods=["GET", "POST"])
 def W_conference():
     if request.method=="POST":
@@ -49,6 +53,7 @@ def W_conference():
         allrecords=cursor.fetchall()
     return render_template("w_conference.html",records=allrecords)
 
+#Route to show Eastern Conference Teams with Eastern Conference filters
 @application.route('/E_conference',methods=["GET", "POST"])
 def E_conference():
     if request.method=="POST":
@@ -61,7 +66,7 @@ def E_conference():
     return render_template("E_conference.html",records=allrecords)
 
        
-
+#Route to add a new player page
 @application.route("/AddPlayer", methods=[ "GET", "POST"])
 def new_player():
     form1= AddPlayer()
@@ -73,6 +78,7 @@ def new_player():
     cursor.execute("select * from nba_division_wiki")
     return render_template("AddPlayer.html",form=form1, teams=teams_list)
 
+#Route to ensure the information put in the edited form is saved to the database
 @application.route("/saveeditplayer", methods=[ "GET", "POST"])
 def saveeditplayer():
     form= UpdatePlayer()
@@ -84,6 +90,7 @@ def saveeditplayer():
         mydb.commit()
     return redirect("/players")
 
+#Route to edit a player profile that has already been generated
 @application.route("/editplayer/<int:playerid>", methods=[ "GET", "POST"])
 def editplayer(playerid):
     form= UpdatePlayer()
@@ -107,7 +114,7 @@ def editplayer(playerid):
         return redirect("/")
     return render_template("EditPlayer.html",form=form, teams=teams_list)
 
-
+#Route to ensure the information put in the edited form is saved to the database
 @application.route("/saveNewPlayer",methods=["post"])
 def add_new_player():
     record=request.form
@@ -116,7 +123,7 @@ def add_new_player():
     cursor.execute(sqlInsertQuery)
     mydb.commit()
     return redirect("players")
-
+#Route for player profile deletion
 @application.route("/deletePlayer/<player_id>")
 def deletePlayer(player_id):
     cursor.execute("DELETE FROM nba_player_library WHERE Player_ID = {0}".format(player_id))
