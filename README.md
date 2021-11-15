@@ -31,16 +31,16 @@ The probability and impact level (both respectively rated out of 5) of each indi
 
 The App:
 When first navigating the app, the user is met with the main homepage:
-Homepage
+Homepage:
 The homepage is a simple page with a small introduction of what the app entails. The nav bar provides links which allows the user to either view the player database (the list of players currently added to the database) or the option to view the teams based on which conference they want to look at. 
 ![Home](https://raw.githubusercontent.com/judecco/NBA-Project/master/images/Picture1.png)
 
-Players
+Players:
 Within this page, the user can see exactly what players have been added to the database, with the players information also available for view (first name, last name, hometown, college, height, position, team). The consumer would have the ability to create a new player which would allow them to put in the information necessary to add players to the database. The user can also edit the players within the database, giving them the ability to change the information on each player if there are any changes to be made. They are also able to delete a player from the database if there were to be a player no longer active. 
 ![Players Home](https://raw.githubusercontent.com/judecco/NBA-Project/master/images/Picture4.png)
 ![Players Form](https://raw.githubusercontent.com/judecco/NBA-Project/master/images/Picture5.png)
 
-Conference
+Conference:
 Finally, users can navigate through the different conferences, filtering through each conference by the division to see what teams are in the division and the name of the arena that they play in. 
 ![Eastern Conference](https://raw.githubusercontent.com/judecco/NBA-Project/master/images/Picture2.png)
 ![Western Conference](https://raw.githubusercontent.com/judecco/NBA-Project/master/images/Picture3.png)
